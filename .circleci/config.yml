@@ -13,8 +13,8 @@ jobs:
       - run:
           name: Init terraform
           command: |
-            terraform init ~/work/terraform
             export GOOGLE_APPLICATION_CREDENTIALS=~/key.json
+            terraform init ~/work/terraform
       - run:
           name: Validate terraform
           command: |
