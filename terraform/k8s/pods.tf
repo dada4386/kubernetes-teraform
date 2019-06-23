@@ -2,7 +2,7 @@ resource "kubernetes_replication_controller" "redis-master" {
   metadata {
     name = "redis-master"
 
-    labels {
+    labels = {
       app  = "redis"
       role = "master"
       tier = "backend"
@@ -42,7 +42,7 @@ resource "kubernetes_replication_controller" "redis-slave" {
   metadata {
     name = "redis-slave"
 
-    labels {
+    labels = {
       app  = "redis"
       role = "slave"
       tier = "backend"
@@ -87,7 +87,7 @@ resource "kubernetes_replication_controller" "frontend" {
   metadata {
     name = "frontend"
 
-    labels {
+    labels = {
       app  = "primary"
       tier = "frontend"
     }

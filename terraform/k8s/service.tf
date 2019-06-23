@@ -3,7 +3,7 @@ resource "kubernetes_service" "redis-master" {
   metadata {
     name = "redis-master"
 
-    labels {
+    labels = {
       app  = "redis"
       role = "master"
       tier = "backend"
@@ -11,7 +11,7 @@ resource "kubernetes_service" "redis-master" {
   }
 
   spec {
-    selector {
+    selector = {
       app  = "redis"
       role = "master"
       tier = "backend"
@@ -28,7 +28,7 @@ resource "kubernetes_service" "redis-slave" {
   metadata {
     name = "redis-slave"
 
-    labels {
+    labels = {
       app  = "redis"
       role = "slave"
       tier = "backend"
@@ -36,7 +36,7 @@ resource "kubernetes_service" "redis-slave" {
   }
 
   spec {
-    selector {
+    selector = {
       app  = "redis"
       role = "slave"
       tier = "backend"
@@ -53,14 +53,14 @@ resource "kubernetes_service" "frontend" {
   metadata {
     name = "frontend"
 
-    labels {
+    labels = {
       app  = "guestbook"
       tier = "frontend"
     }
   }
 
   spec {
-    selector {
+    selector = {
       app  = "guestbook"
       tier = "frontend"
     }
