@@ -1,7 +1,7 @@
 version: 2
 jobs:
   test:
-    working_directory: ~/terraform
+    working_directory: ~/work
     docker:
       - image: hashicorp/terraform:light
     steps:
@@ -9,19 +9,24 @@ jobs:
       - run:
           name: create gcp credential
           command: |
-            echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/key.json
-            export GOOGLE_APPLICATION_CREDENTIALS=${HOME}/key.json
+            echo $GCLOUD_SERVICE_KEY | base64 -d > ~/key.json
       - run:
           name: Init terraform
-          command: terraform init ~/terraform
+          command: |
+            terraform init ~/work/terraform
+            export GOOGLE_APPLICATION_CREDENTIALS=~/key.json
       - run:
           name: Validate terraform
-          command: terraform validate ~/terraform
+          command: |
+            export GOOGLE_APPLICATION_CREDENTIALS=~/key.json
+            terraform validate ~/work/terraform
       - run:
           name: Plan terraform
-          command: terraform plan ~/terraform
+          command: |
+            export GOOGLE_APPLICATION_CREDENTIALS=~/key.json
+            terraform plan ~/work/terraform
   deploy:
-    working_directory: ~/terraform
+    working_directory: ~/work
     docker:
       - image: hashicorp/terraform:light
     steps:
@@ -29,14 +34,17 @@ jobs:
       - run:
           name: create gcp credential
           command: |
-            echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/key.json
-            export GOOGLE_APPLICATION_CREDENTIALS=${HOME}/key.json
+            echo $GCLOUD_SERVICE_KEY | base64 -d > ~/key.json
       - run:
           name: Init terraform
-          command: terraform init ~/terraform
+          command: |
+            export GOOGLE_APPLICATION_CREDENTIALS=~/key.json
+            terraform init ~/work/terraform
       - run:
           name: Apply terraform
-          command: terraform apply -auto-approve ~/terraform
+          command: |
+            export GOOGLE_APPLICATION_CREDENTIALS=~/key.json
+            terraform apply -auto-approve ~/work/terraform
 workflows:
   version: 2
   test-and-deploy:
