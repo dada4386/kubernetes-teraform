@@ -34,6 +34,36 @@ jobs:
           name: checking docker build 
           command: |
             docker build ~/work/docker/flask_get_app
+  docker-push:
+    working_directory: ~/work
+    docker:
+      - image: google/cloud-sdk:latest
+    environment:
+      PROJECT: teraform-244604
+      IMG_NAME: get-hello
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 18.05.0-ce
+      - run:
+          name: gcloud auth
+          command: |
+            echo $GCLOUD_SERVICE_KEY | base64 -d > ~/key.json
+            gcloud auth activate-service-account --key-file ~/key.json
+            gcloud --quiet auth configure-docker
+      - run:
+          name: docker build and push
+          command: |
+            DOCKER_BASE=asia.gcr.io/${PROJECT}/${IMG_NAME}
+            if [ -z "${CIRCLE_BUILD_NUM}" ]; then
+              CIRCLE_BUILD_NUM=1
+            fi
+            docker build -t ${DOCKER_BASE}:${CIRCLE_BUILD_NUM} ~/work/docker/flask_get_app
+            docker tag ${DOCKER_BASE}:${CIRCLE_BUILD_NUM} ${DOCKER_BASE}:latest
+            if [ -n "${CIRCLE_TAG}" ];then
+              docker tag ${DOCKER_BASE}:${CIRCLE_BUILD_NUM} ${DOCKER_BASE}:${CIRCLE_TAG}
+            fi
+            docker push ${DOCKER_BASE}
   deploy:
     working_directory: ~/work
     docker:
@@ -68,9 +98,15 @@ workflows:
           filters:
             branches:
               only: master
-      - deploy:
+      - docker-push:
           requires:
             - hold
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - docker-build
           filters:
             branches:
               only: master
