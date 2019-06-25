@@ -27,8 +27,7 @@ jobs:
             terraform plan ~/work/terraform
   docker-test:
     working_directory: ~/work
-    docker:
-      - image: docker:17.05.0-ce-git
+    machine: true
     steps:
       - checkout
       - run:
