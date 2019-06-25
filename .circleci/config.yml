@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  test:
+  terraform-test:
     working_directory: ~/work
     docker:
       - image: hashicorp/terraform:light
@@ -25,6 +25,16 @@ jobs:
           command: |
             export GOOGLE_APPLICATION_CREDENTIALS=~/key.json
             terraform plan ~/work/terraform
+  docker-test:
+    working_directory: ~/work
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - run:
+          name: checking docker build 
+          command: |
+            docker build ~/work/docker/flask_get_app
   deploy:
     working_directory: ~/work
     docker:
@@ -49,11 +59,13 @@ workflows:
   version: 2
   test-and-deploy:
     jobs:
-      - test
+      - terraform-test
+      - docker-test
       - hold:
           type: approval
           requires:
-            - test
+            - terraform-test
+            - docker-test
           filters:
             branches:
               only: master
