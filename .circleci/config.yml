@@ -3,7 +3,9 @@ jobs:
   terraform-test:
     working_directory: ~/work
     docker:
-      - image: hashicorp/terraform:light
+      - image: hashicorp/terraform:latest
+    environment:
+      TF_VAR_openapi_path: ~/work/terraform/endpoint/openapi_spec.yml
     steps:
       - checkout
       - run:
@@ -32,8 +34,7 @@ jobs:
       - checkout
       - run:
           name: checking docker build 
-          command: |
-            docker build ~/work/docker/flask_get_app
+          command: docker build ~/work/docker/flask_get_app
   docker-push:
     working_directory: ~/work
     docker:
@@ -68,12 +69,13 @@ jobs:
     working_directory: ~/work
     docker:
       - image: hashicorp/terraform:light
+    environment:
+      TF_VAR_openapi_path: ~/work/terraform/endpoint/openapi_spec.yml
     steps:
       - checkout
       - run:
           name: create gcp credential
-          command: |
-            echo $GCLOUD_SERVICE_KEY | base64 -d > ~/key.json
+          command: echo $GCLOUD_SERVICE_KEY | base64 -d > ~/key.json
       - run:
           name: Init terraform
           command: |

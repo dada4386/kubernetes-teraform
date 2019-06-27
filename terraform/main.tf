@@ -2,6 +2,10 @@ variable "project" {
     default = "teraform-244604"
 }
 
+variable "openapi_path" {
+  default = "./endpoint/openapi_spec.yml"
+}
+
 module "cluster" {
     source   = "./cluster"
 }
@@ -16,5 +20,6 @@ module "k8s" {
 }
 
 module "endpoints" {
-    source   = "./endpoint"
+  openapi_path = var.openapi_path
+  source   = "./endpoint"
 }
