@@ -2,7 +2,7 @@ from flask import Flask, jsonify, abort, make_response
 
 fapi = Flask(__name__)
 
-@fapi.route('/', methods=['GET'])
+@fapi.route('/hello', methods=['GET'])
 def get():
     res = { "message": "hello world" }
     return make_response(jsonify(res))

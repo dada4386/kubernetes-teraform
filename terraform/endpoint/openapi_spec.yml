@@ -1,0 +1,34 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Hello World API"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+security:
+  - api_key_header: []
+  - defined_bearer_token: []
+#host: "a20190622-teraform.appspot.com"
+host: "api-master.endpoints.teraform-244604.cloud.goog"
+schemes:
+  - "https"
+paths:
+  /hello:
+    get:
+      operationId: return hello
+      description: It's hello world 
+      produces:
+        - text/plain
+      responses:
+        '200':
+          description: hello world
+          schema:
+            type: string
+      security:
+      - api_key: []
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: key
+    in: query
