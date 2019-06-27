@@ -90,20 +90,10 @@ workflows:
     jobs:
       - terraform-test
       - docker-test
-      - hold:
-          type: approval
+      - docker-push:
           requires:
             - terraform-test
             - docker-test
-          filters:
-            branches:
-              only: master
-      - docker-push:
-          requires:
-            - hold
-          filters:
-            branches:
-              only: master
       - deploy:
           requires:
             - docker-push
