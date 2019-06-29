@@ -1,0 +1,31 @@
+resource "google_project_services" "project" {
+  project = "${var.project}"
+  services   = [
+    "iam.googleapis.com", 
+    "cloudresourcemanager.googleapis.com",
+    "servicecontrol.googleapis.com",
+    "endpoints.googleapis.com",
+    "endpointsportal.googleapis.com",
+    "container.googleapis.com",
+    "containerregistry.googleapis.com",
+    "serviceusage.googleapis.com",
+    "storage-api.googleapis.com",
+    "storage-component.googleapis.com",
+    "bigquery-json.googleapis.com",
+    "cloudapis.googleapis.com",
+    "clouddebugger.googleapis.com",
+    "cloudtrace.googleapis.com",
+    "compute.googleapis.com",
+    "datastore.googleapis.com",
+    "firebaserules.googleapis.com",
+    "firestore.googleapis.com",
+    "logging.googleapis.com",
+    "monitoring.googleapis.com",
+    "oslogin.googleapis.com",
+    "servicemanagement.googleapis.com",
+    "sql-component.googleapis.com",
+    "iamcredentials.googleapis.com",
+    "pubsub.googleapis.com",
+    "hello-api.endpoints.teraform-244604.cloud.goog",
+  ]
+}
