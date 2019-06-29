@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: endpoint-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "test-ip"
+spec:
+  tls:
+  - secretName: tls-secret
+  backend:
+    serviceName: endpoint-service
+    servicePort: 8080
