@@ -4,7 +4,7 @@ export TERRAFORM_SA_EMAIL=$(gcloud iam service-accounts list \
     --project=$GCP_PROJECT \
     --filter="displayName:$TERRAFORM_SA" \
     --format='value(email)')
-export GOOGLE_APPLICATION_CREDENTIALS=/home/dada/.gcp/terraform-account.json
+export GOOGLE_APPLICATION_CREDENTIALS=~/.gcp/terraform-account.json
 
 gcloud config set compute/zone asia-northeast1-a
 gcloud config set project teraform-244604
