@@ -25,6 +25,22 @@ resource "kubernetes_replication_controller" "hello-api" {
         port {
           container_port = 8081
         }
+        liveness_probe {
+          http_get {
+            path = "/healthcheck"
+            port = "8081"
+          }
+          initial_delay_seconds = 3
+          period_seconds = 3
+        }
+        readiness_probe {
+          http_get {
+            path = "/healthcheck"
+            port = "8081"
+          }
+          initial_delay_seconds = 3
+          period_seconds = 3
+        }
       }
       container {
         name = "hello-api"

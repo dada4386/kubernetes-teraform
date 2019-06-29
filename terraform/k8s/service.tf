@@ -1,6 +1,9 @@
 resource "kubernetes_service" "endpoints" {
   metadata {
     name = "endpoints-service"
+    labels = {
+      apps = "endpoints-service"
+    }
   }
 
   spec {
@@ -9,10 +12,10 @@ resource "kubernetes_service" "endpoints" {
     }
     port {
       protocol    = "TCP"
-      port        = 80
+      port        = 8081
       target_port = 8081
     }
-    type = "LoadBalancer"
+    type = "NodePort"
   }
 }
 

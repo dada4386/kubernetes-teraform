@@ -11,7 +11,7 @@ security:
   - defined_bearer_token: []
 host: "hello-api.endpoints.teraform-244604.cloud.goog"
 schemes:
-  - "https"
+  - "http"
 paths:
   /hello:
     get:
@@ -26,6 +26,12 @@ paths:
             type: string
       security:
       - api_key: []
+  /healthcheck:
+    get:
+      operationId: healthcheck
+      responses:
+        '200':
+          description: 'OK'
 securityDefinitions:
   api_key:
     type: apiKey
