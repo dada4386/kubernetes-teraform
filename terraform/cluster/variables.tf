@@ -1,6 +1,4 @@
-variable "project" {
-    default = "teraform-244604"
-}
+variable "project" {}
 
 variable "cluster_name" {
     default = "microservice-test"

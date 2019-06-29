@@ -8,6 +8,7 @@ variable "openapi_path" {
 
 module "cluster" {
   source   = "./cluster"
+  project  = "${var.project}"
 }
 
 module "k8s" {
@@ -21,5 +22,7 @@ module "k8s" {
 
 module "endpoints" {
   source   = "./endpoint"
+
+  project      = "${var.project}"
   openapi_path = "${var.openapi_path}"
 }
