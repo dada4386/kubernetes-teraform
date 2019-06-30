@@ -7,8 +7,8 @@ APIキー認証が可能なCloud Endpointを導入しています
 また、CircleCIを使用してGCRへのdocker build,push
 およびterraform applyも実施します(masterブランチのみ)
 
-# ネットワーク構成 (あとで図を入れたい)
-GKE [ ingress <-> service(NodePort) <-> pods [ endpoint-runtime(:8081) <-> hello-api(:3000) ]]
+# ネットワーク構成 
+![Architecture - Content Management_merge](https://user-images.githubusercontent.com/45912495/60396347-5ae8ce00-9b7b-11e9-8a14-77b0fbd40d34.png)
 
 # Dependency
 - TerraformのGCP権限 :
