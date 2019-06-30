@@ -97,9 +97,6 @@ workflows:
           requires:
             - terraform-test
             - docker-test
-          filters:
-            branches:
-              only: master
       - deploy:
           requires:
             - docker-push
