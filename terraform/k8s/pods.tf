@@ -44,7 +44,7 @@ resource "kubernetes_replication_controller" "hello-api" {
       }
       container {
         name = "hello-api"
-        image = "asia.gcr.io/teraform-244604/get-hello:latest"
+        image = "asia.gcr.io/teraform-244604/get-hello:${var.container_tag}"
         port {
           container_port = 3000
         }

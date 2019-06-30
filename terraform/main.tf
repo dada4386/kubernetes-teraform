@@ -1,11 +1,3 @@
-variable "project" {
-  default = "teraform-244604"
-}
-
-variable "openapi_path" {
-  default = "./endpoint/openapi_spec.yml"
-}
-
 module "cluster" {
   source   = "./cluster"
   project  = "${var.project}"
@@ -18,6 +10,7 @@ module "k8s" {
   client_certificate     = "${module.cluster.client_certificate}"
   client_key             = "${module.cluster.client_key}"
   cluster_ca_certificate = "${module.cluster.cluster_ca_certificate}"
+  container_tag = "${var.container_tag}"
 }
 
 module "endpoints" {

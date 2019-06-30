@@ -85,6 +85,7 @@ jobs:
           name: Apply terraform
           command: |
             export GOOGLE_APPLICATION_CREDENTIALS=~/key.json
+            export TF_VAR_container_tag = "${CIRCLE_BUILD_NUM}"
             terraform apply -auto-approve ~/work/terraform
 workflows:
   version: 2
