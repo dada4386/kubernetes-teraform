@@ -27,5 +27,6 @@ resource "google_project_services" "project" {
     "iamcredentials.googleapis.com",
     "pubsub.googleapis.com",
     "hello-api.endpoints.teraform-244604.cloud.goog",
+    "sqladmin.googleapis.com",
   ]
 }

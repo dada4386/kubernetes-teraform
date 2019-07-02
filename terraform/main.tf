@@ -1,6 +1,13 @@
 module "cluster" {
   source   = "./cluster"
   project  = "${var.project}"
+  location = "${var.location}"
+}
+
+module "sql" {
+  source    = "./sql"  
+  region    = "${var.region}"
+  project   = "${var.project}"
 }
 
 module "k8s" {

@@ -9,3 +9,11 @@ variable "openapi_path" {
 variable "container_tag" {
   default = "latest"
 }
+
+variable "region" {
+  default = "asia-northeast1"
+}
+
+variable "location" {
+  default = "asia-northeast1-a"
+}

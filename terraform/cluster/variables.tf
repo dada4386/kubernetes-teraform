@@ -1,11 +1,8 @@
 variable "project" {}
+variable "location" {}
 
 variable "cluster_name" {
     default = "microservice-test"
-}
-
-variable "location" {
-    default = "asia-northeast1-a"
 }
 
 variable "network" {
