@@ -1,11 +1,11 @@
 data "google_client_config" "current" {}
 
 provider "kubernetes" {
-    host     = "${var.host}"
+    host     = "${google_container_cluster.primary.endpoint}"
 
-    client_certificate     = "${base64decode(var.client_certificate)}"
-    client_key             = "${base64decode(var.client_key)}"
-    cluster_ca_certificate = "${base64decode(var.cluster_ca_certificate)}"
+    client_certificate     = "${base64decode(google_container_cluster.primary.master_auth.0.client_certificate)}"
+    client_key             = "${base64decode(google_container_cluster.primary.master_auth.0.client_key)}"
+    cluster_ca_certificate = "${base64decode(google_container_cluster.primary.master_auth.0.cluster_ca_certificate)}"
 
     token = "${data.google_client_config.current.access_token}"
 }
