@@ -7,6 +7,7 @@ module "base" {
   source = "./google"
   project = "${var.project}"
   location = "${var.location}"
+  global_domain = "${var.global_domain}"
 }
 
 module "sql" {

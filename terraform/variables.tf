@@ -17,3 +17,7 @@ variable "region" {
 variable "location" {
   default = "asia-northeast1-a"
 }
+
+variable "global_domain" {
+  default = "data-diary.info"
+}
