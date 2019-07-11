@@ -11,11 +11,11 @@ variable "container_tag" {
 }
 
 variable "region" {
-  default = "asia-northeast1"
+  default = "us-west1"
 }
 
 variable "location" {
-  default = "asia-northeast1-a"
+  default = "us-west1-a"
 }
 
 variable "global_domain" {
