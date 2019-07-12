@@ -9,7 +9,7 @@ produces:
 security:
   - api_key_header: []
   - defined_bearer_token: []
-host: "hello-api.endpoints.teraform-244604.cloud.goog"
+host: "hello-api2.endpoints.teraform-244604.cloud.goog"
 schemes:
   - "http"
 paths:

@@ -8,7 +8,7 @@ resource "kubernetes_service" "endpoints" {
 
   spec {
     selector = {
-      app  = "endpoints-app"
+      app = "endpoints-app"
     }
     port {
       protocol    = "TCP"
@@ -23,12 +23,12 @@ resource "kubernetes_deployment" "hello-api" {
   metadata {
     name = "hello-api"
     labels = {
-      app  = "endpoints-app"
+      app = "endpoints-app"
     }
   }
 
   spec {
-    replicas = 2
+    replicas = 1
     selector {
       match_labels = {
         app = "endpoints-app"
@@ -44,12 +44,12 @@ resource "kubernetes_deployment" "hello-api" {
 
       spec {
         container {
-          name = "esp"
+          name  = "esp"
           image = "gcr.io/endpoints-release/endpoints-runtime:1"
           args = [
             "--http_port=8081",
             "--backend=0.0.0.0:3000",
-            "--service=hello-api.endpoints.teraform-244604.cloud.goog",
+            "--service=hello-api2.endpoints.teraform-244604.cloud.goog",
             "--rollout_strategy=managed"
           ]
           port {
@@ -61,7 +61,7 @@ resource "kubernetes_deployment" "hello-api" {
               port = "8081"
             }
             initial_delay_seconds = 3
-            period_seconds = 3
+            period_seconds        = 3
           }
           readiness_probe {
             http_get {
@@ -69,11 +69,11 @@ resource "kubernetes_deployment" "hello-api" {
               port = "8081"
             }
             initial_delay_seconds = 3
-            period_seconds = 3
+            period_seconds        = 3
           }
         }
         container {
-          name = "hello-api"
+          name  = "hello-api"
           image = "asia.gcr.io/teraform-244604/get-hello:latest"
           port {
             container_port = 3000

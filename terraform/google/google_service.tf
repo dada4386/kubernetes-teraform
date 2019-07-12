@@ -1,7 +1,7 @@
 resource "google_project_services" "project" {
   project = "${var.project}"
-  services   = [
-    "iam.googleapis.com", 
+  services = [
+    "iam.googleapis.com",
     "cloudresourcemanager.googleapis.com",
     "servicecontrol.googleapis.com",
     "endpoints.googleapis.com",
@@ -26,7 +26,7 @@ resource "google_project_services" "project" {
     "sql-component.googleapis.com",
     "iamcredentials.googleapis.com",
     "pubsub.googleapis.com",
-    "hello-api.endpoints.teraform-244604.cloud.goog",
+    "hello-api2.endpoints.teraform-244604.cloud.goog",
     "sqladmin.googleapis.com",
     "dns.googleapis.com",
   ]

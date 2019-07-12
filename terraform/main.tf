@@ -4,27 +4,28 @@ provider "google" {
 }
 
 module "base" {
-  source = "./google"
-  project = "${var.project}"
-  location = "${var.location}"
+  source        = "./google"
+  project       = "${var.project}"
+  location      = "${var.location}"
   global_domain = "${var.global_domain}"
 }
 
-module "sql" {
-  source    = "./sql"  
-  region    = "${var.region}"
-  project   = "${var.project}"
-}
+#module "sql" {
+#  source    = "./sql"
+#  region    = "${var.region}"
+#  project   = "${var.project}"
+#}
 
 module "k8s" {
-  source   = "./k8s"
-  location = "${var.location}"
+  source        = "./k8s"
+  location      = "${var.location}"
   container_tag = "${var.container_tag}"
 }
 
 module "endpoints" {
-  source   = "./endpoint"
+  source = "./endpoint"
 
   project      = "${var.project}"
   openapi_path = "${var.openapi_path}"
 }
+

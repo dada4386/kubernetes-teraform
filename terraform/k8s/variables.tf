@@ -9,12 +9,13 @@ variable "network" {
   default = "default"
 }
 
-variable "primary_node_count" {
-  default = "4"
-}
-
-variable "machine_type" {
-  default = "f1-micro"
+variable "k8s_pool" {
+  default = {
+    initial_node_count = 4
+    min_node_count     = 2
+    max_node_count     = 10
+    cluster_node_type  = "g1-small"
+  }
 }
 
 variable "min_master_version" {
